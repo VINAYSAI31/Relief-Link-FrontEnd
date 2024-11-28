@@ -1,0 +1,99 @@
+/* DonorReg.css */
+
+.regbody {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to right, #f0f4f8, #e1f5fe);
+  }
+  
+  .container {
+    display: flex;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    align-items: center;
+    position: relative;
+    top:46px;
+  }
+  
+  .register-image {
+    width: 50%;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .register-container {
+    width: 50%;
+    padding: 40px;
+    text-align: center;
+    min-height: 500px;
+  }
+  
+  .register-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+  }
+  
+  .form-group i {
+    position: absolute;
+    left: 10px;
+    font-size: 18px;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .form-group textarea {
+    resize: none;
+  }
+  
+  .btn-register {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .btn-register:hover {
+    background-color: #45a049;
+  }
+  
+  .link-container {
+    margin-top: 10px;
+  }
+  
+  .link-container a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .link-container a:hover {
+    text-decoration: underline;
+  }
+  

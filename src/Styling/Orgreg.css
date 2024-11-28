@@ -1,0 +1,150 @@
+/* Main container styling */
+.org-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background: #f5f7fa;
+    min-height: 100vh;
+  }
+  
+  /* Header styling */
+  .org-form-header {
+    font-size: 26px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Info Box */
+  .org-info-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 30px;
+  }
+  
+  .org-info-box h3 {
+    color: #4caf50;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  
+  .org-info-box p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .org-info-box ul {
+    color: #333;
+    font-size: 14px;
+  }
+  
+  .org-info-box ul li {
+    margin: 5px 0;
+  }
+  
+  /* Form styling */
+  .org-form {
+    background: #fff;
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px;
+    display: grid;
+    gap: 25px;
+  }
+  
+  .org-form label {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .org-input-container {
+    position: relative;
+  }
+  
+  .org-form input,
+  .org-form select,
+  .org-form button {
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .org-form input[type="text"],
+  .org-form input[type="email"],
+  .org-form input[type="tel"],
+  .org-form select {
+    background-color: #f9f9f9;
+  }
+  
+  .org-form input:focus,
+  .org-form select:focus {
+    border-color: #4caf50;
+    outline: none;
+  }
+  
+  .org-form button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .org-form button:hover {
+    background-color: #45a049;
+  }
+  
+  .org-form .org-input-error {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* Icon styling */
+  .org-form i {
+    color: #4caf50;
+    position: absolute;
+    top: 35px;
+    right: 15px;
+    pointer-events: none;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .org-form-container {
+      padding: 20px;
+    }
+  
+    .org-form {
+      width: 90%;
+      padding: 25px;
+    }
+  
+    .org-form-header {
+      font-size: 22px;
+    }
+  
+    .org-info-box {
+      width: 90%;
+      padding: 15px;
+    }
+  }
+  
