@@ -18,8 +18,8 @@ const Orgnavbar = () => {
         <Link to="#dashboard" >
           <i className="fas fa-tachometer-alt"></i> Dashboard
         </Link> 
-        <Link to="#donate" >
-        <i className="fas fa-hand-holding-heart"></i> Manage Donations
+        <Link to="/mycampaigns" >
+        <i className="fas fa-hand-holding-heart"></i> My Campaings
         </Link>
         <Link to="/addcampaign" className="orgbar-link">
     <i className="fas fa-hands-helping"></i> Add Campaign

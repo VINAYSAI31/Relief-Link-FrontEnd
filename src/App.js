@@ -13,6 +13,9 @@ import Donors from './Components/Admin/Donors.jsx';
 import Orgreg from './Components/Organization/Orgreg.jsx';
 import Orghome from './Components/Organization/Orghome.jsx';
 import Addcampaign from './Components/Organization/Addcampaign.jsx';
+import Mycampaigns from './Components/Organization/Mycampaigns.jsx';
+import AllCampaings from './Components/Donor/AllCampaings.jsx';
+import CampaignDetails from './Components/Donor/CampaignDetails.jsx';
 
 
 function App() {
@@ -32,6 +35,8 @@ function App() {
         <Route path='/donorlogin' element={<Donorlogin/>}/>
         <Route path='donorreg' element={<DonorReg/>}/>
         <Route path='/donorhome' element={<Donorhome/>}/>
+        <Route path='/allcamps' element={<AllCampaings/>}/>
+        <Route path='/campaign/:id' element={<CampaignDetails/>}/>
 
 
 
@@ -42,6 +47,7 @@ function App() {
         <Route path='/orgreg' element={<Orgreg/>}/>
         <Route path='/orghome' element={<Orghome/>}/>
         <Route path='/addcampaign' element={<Addcampaign/>}/>
+        <Route path='/mycampaigns' element={<Mycampaigns/>}/>
        
 
         

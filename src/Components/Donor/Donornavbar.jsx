@@ -18,7 +18,7 @@ const Donornavbar = () => {
         <Link to="#dashboard" >
           <i className="fas fa-tachometer-alt"></i> Dashboard
         </Link> 
-        <Link to="#donate" >
+        <Link to="/allcamps" >
           <i className="fas fa-donate"></i> Make a Donation
         </Link>
         <Link to="#history" >

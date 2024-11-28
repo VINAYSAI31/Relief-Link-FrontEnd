@@ -1,12 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import '../../Styling/Adminlogin.css'
+import '../../Styling/Adminlogin.css';
 import ProjectNavbar from '../ProjectNavbar';
 import { Link, useNavigate } from 'react-router-dom';
-
-
-
 
 const Donorlogin = () => {
   const {
@@ -14,27 +11,37 @@ const Donorlogin = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-const navigate=useNavigate();
+  const navigate = useNavigate();
+
   // Function to handle form submission
   const onSubmit = async (data) => {
     try {
-      
-  
-      const response = await axios.post('http://localhost:2024/donor/api/checkdonorlogin', data);
-  
+      console.log('Form data submitted:', data);
+      const response = await axios.post(
+'http://localhost:2024/donor/api/checkdonorlogin',        data
+      );
+
       if (response.status === 200) {
         console.log('Login successful:', response.data);
-        
         alert('Login Successful');
-        navigate('/donorhome');
-        // Redirect to Adminhome
+        navigate('/donorhome'); // Redirect to donor home page
+      } else {
+        console.error('Unexpected response status:', response.status);
+        alert('Login failed. Please check your credentials.');
       }
     } catch (error) {
-      console.error('Error during login:', error.response?.data || error.message);
-      alert('Login failed. Please check your credentials.');
+      if (error.response) {
+        console.error('Server responded with an error:', error.response.data);
+        alert(error.response.data.message || 'Login failed. Please try again.');
+      } else if (error.request) {
+        console.error('No response received from server:', error.request);
+        alert('Unable to connect to server. Please try again later.');
+      } else {
+        console.error('Error setting up request:', error.message);
+        alert('An unexpected error occurred. Please try again.');
+      }
     }
-  };;
-  
+  };
 
   return (
     <>
@@ -44,16 +51,16 @@ const navigate=useNavigate();
           <div className="login-image"></div>
           <div className="login-container">
             <h2>Welcome Back Donor</h2>
-            {/* Form for admin login */}
+            {/* Form for donor login */}
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-group">
                 <i>&#9993;</i>
                 <input
                   type="email"
-                  {...register('email', { required: 'email is required' })}
+                  {...register('email', { required: 'Email is required' })}
                   placeholder="Your email"
                 />
-                {errors.ausername && <span className="error">{errors.ausername.message}</span>}
+                {errors.email && <span className="error">{errors.email.message}</span>}
               </div>
               <div className="form-group">
                 <i>&#128274;</i>
@@ -62,14 +69,16 @@ const navigate=useNavigate();
                   {...register('password', { required: 'Password is required' })}
                   placeholder="Password"
                 />
-                {errors.apwd && <span className="error">{errors.apwd.message}</span>}
+                {errors.password && <span className="error">{errors.password.message}</span>}
               </div>
               <button type="submit" className="btn-login">
                 Log In
               </button>
-              <div class="signup-link">
-        <p>Don't have an account? <Link to='/donorreg'>Signup Now</Link></p>
-    </div> 
+              <div className="signup-link">
+                <p>
+                  Don't have an account? <Link to="/donorreg">Signup Now</Link>
+                </p>
+              </div>
             </form>
           </div>
         </div>
