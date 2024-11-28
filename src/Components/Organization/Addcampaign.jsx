@@ -11,35 +11,40 @@ const Addcampaign = () => {
 
   // Function to handle form submission
   const onSubmit = async (data) => {
-    // Create a new FormData object
-    const formData = new FormData();
-    
-    // Append form data
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    formData.append("category", data.category);
-    formData.append("contributionType", data.contributionType);
-    formData.append("location", data.location);
-    formData.append("startDate", data.startDate);
-    formData.append("endDate", data.endDate);
-    formData.append("email", data.email);
-
-    // Check if there is an image file and append it to the FormData
-    if (data.image && data.image[0]) {
-      formData.append("image", data.image[0]); // Assuming `image` is a file input
-    }
-
-    // If contribution type is "goods" or "items", include the goodsType details
-    if (contributionType !== "money") {
-      formData.append("contributionDetails", data.goodsType);
-    }
-
     try {
+      // Separate the campaign data from the image file
+      const campaignData = {
+        title: data.title,
+        description: data.description,
+        category: data.category,
+        contributionType: data.contributionType,
+        location: data.location,
+        startDate: data.startDate,
+        endDate: data.endDate,
+        email: data.email,
+        
+      };
+
+      if (contributionType !== "money") {
+        campaignData.contributionDetails = data.goodsType;
+      }
+
+      // Append campaign data and image file to FormData
+      const formData = new FormData();
+      formData.append('camp', new Blob([JSON.stringify(campaignData)], { type: 'application/json' }));
+      
+      if (data.image && data.image[0]) {
+        formData.append('imagefile', data.image[0]);
+      }
+      formData.append('orgName',data.orgName);
+
+      // POST request to the backend
       const response = await axios.post(`${Org_url}/addcampaign`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data", // Important to specify the content type
+          "Content-Type": "multipart/form-data",
         },
       });
+
       alert("Campaign added successfully!");
       reset(); // Reset the form after submission
     } catch (error) {
@@ -50,7 +55,7 @@ const Addcampaign = () => {
 
   return (
     <>
-    <Orgnavbar/>
+    <Orgnavbar />
     <div className="main-content">
         <div className="card-container">
           {/* Top Card */}
@@ -74,6 +79,16 @@ const Addcampaign = () => {
       </p>
 
       <form className="add-campaign-form" onSubmit={handleSubmit(onSubmit)}>
+        {/* Organization Name */}
+        <label htmlFor="orgName">Organization Name</label>
+        <input
+          type="text"
+          id="orgName"
+          placeholder="Enter organization name"
+          {...register("orgName", { required: "Organization name is required" })}
+        />
+        {errors.orgName && <p className="error-text">{errors.orgName.message}</p>}
+
         {/* Campaign Title */}
         <label htmlFor="title">Campaign Title</label>
         <input
