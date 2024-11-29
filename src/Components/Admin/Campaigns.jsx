@@ -100,7 +100,7 @@ const Campaigns = () => {
                     <div key={campaign.id} className="campaign-card">
                       <img src={getImageUrl(campaign.id)} alt={campaign.title} />
                       <h3>{campaign.title}</h3>
-                      <p>{campaign.description}</p>
+                      {/*      */}
                       <button onClick={() => deleteCampaign(campaign.id)}>Delete</button>
                       <button onClick={() => handleEdit(campaign)}>Edit</button>
                     </div>

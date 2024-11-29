@@ -1,4 +1,4 @@
-.campaigns-container {
+/* .campaigns-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
@@ -53,8 +53,8 @@
     margin-bottom: 5px;
     color: #666;
   }
-  
-  .campaign-category {
+  /*  */
+  /* .campaign-category {
     font-weight: bold;
   }
-  
+    */

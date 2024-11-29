@@ -117,13 +117,13 @@ const Mycampaigns = () => {
                     </div>
                     <div className="card-content">
                       <h3 className="campaign-title">{campaign.title}</h3>
-                      <p className="campaign-description">{campaign.description}</p>
-                      <p className="campaign-category">Category: {campaign.category}</p>
-                      <p className="campaign-location">Location: {campaign.location}</p>
+                      
+                      {/* <p className="campaign-category">Category: {campaign.category}</p> */}
+                      {/* <p className="campaign-location">Location: {campaign.location}</p>
                       <p className="campaign-dates">
                         {new Date(campaign.startdate).toLocaleDateString()} -{' '}
                         {new Date(campaign.enddate).toLocaleDateString()}
-                      </p>
+                      </p> */}
                       <button onClick={() => deleteCampaign(campaign.id)}>Delete</button>
                       <button onClick={() => handleEdit(campaign)}>Edit</button>
                     </div>

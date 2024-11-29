@@ -86,22 +86,24 @@ const AllCampaings = () => {
           </div>
 
           {/* Campaigns Section */}
-          <div className="campaigns-container">
+         <div className='main-card'>
+         <div className="campaigns-container">
             {campaigns.length === 0 ? (
               <p>No active campaigns available.</p>
             ) : (
               campaigns.map((campaign) => (
-                <div className="campaign-card" key={campaign.id}>
-                  <div className="card-image">
+                <div className="ocampaign-card" key={campaign.id}>
+                  <div >
                     <img
                       src={images[campaign.id] || 'https://via.placeholder.com/150'}
                       alt={campaign.title}
-                      className="campaign-img"
+                      
                     />
                   </div>
                   <div className="card-content">
-                    <h3 className="campaign-title">{campaign.title}</h3>
-                    <p className="campaign-description">{campaign.description}</p>
+                    <h1 >{campaign.title}</h1>
+                    {/* <p >{campaign.startdate}-{campaign.enddate}</p> */}
+                    
                     <button
                       className="read-more-button"
                       onClick={() => fetchCampaignDetails(campaign.id)}
@@ -113,46 +115,68 @@ const AllCampaings = () => {
               ))
             )}
           </div>
+         </div>
         </div>
       </div>
 
-      {/* Modal for campaign details */}
-      {selectedCampaign && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <span className="close-button" onClick={closeModal}>
-              &times;
-            </span>
-            <h1>{selectedCampaign.title}</h1>
-            <img
-              src={selectedCampaign.imageUrl || 'https://via.placeholder.com/300'}
-              alt={selectedCampaign.title}
-              className="modal-image"
-            />
-            <p>{selectedCampaign.description}</p>
-            <p>
-              <strong>Category:</strong> {selectedCampaign.category}
-            </p>
-            <p>
-              <strong>Location:</strong> {selectedCampaign.location}
-            </p>
-            <p>
-              <strong>Start Date:</strong>{' '}
-              {new Date(selectedCampaign.startdate).toLocaleDateString()}
-            </p>
-            <p>
-              <strong>End Date:</strong>{' '}
-              {new Date(selectedCampaign.enddate).toLocaleDateString()}
-            </p>
-            <p>
-              <strong>Organizer:</strong> {selectedCampaign.organizer}
-            </p>
-            <p>
-              <strong>Contact:</strong> {selectedCampaign.contact}
-            </p>
-          </div>
+     {/* Modal for campaign details */}
+{/* Modal for campaign details */}
+{selectedCampaign && (
+  <div className="modal-overlay" onClick={closeModal}>
+    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <span className="close-button" onClick={closeModal}>
+        &times;
+      </span>
+
+      {/* Image */}
+      <img
+        src={selectedCampaign.imageUrl || 'https://via.placeholder.com/300'}
+        alt={selectedCampaign.title}
+        className="modal-image"
+      />
+
+      {/* Title */}
+      <h1 className="modal-title">{selectedCampaign.title}</h1>
+
+      {/* Description */}
+      <p className="modal-description">{selectedCampaign.description}</p>
+
+      {/* Dates and Icons */}
+      <div className="modal-date-section">
+        <div className="modal-date">
+          <i className="fas fa-calendar-day"></i>
+          <p>
+            <strong>Start Date:</strong>{' '}
+            {new Date(selectedCampaign.startdate).toLocaleDateString()}
+          </p>
         </div>
-      )}
+        <div className="modal-date">
+          <i className="fas fa-calendar-alt"></i>
+          <p>
+            <strong>End Date:</strong>{' '}
+            {new Date(selectedCampaign.enddate).toLocaleDateString()}
+          </p>
+        </div>
+      </div>
+
+      {/* Additional info */}
+      <p>
+        <strong>Category:</strong> {selectedCampaign.category}
+      </p>
+      <p>
+        <strong>Location:</strong> {selectedCampaign.location}
+      </p>
+      <p>
+        <strong>Organizer:</strong> {selectedCampaign.organizer}
+      </p>
+      <p>
+        <strong>Contact:</strong> {selectedCampaign.contact}
+      </p>
+    </div>
+  </div>
+)}
+
+
     </div>
   );
 };
