@@ -157,4 +157,4 @@ const AllCampaings = () => {
   );
 };
 
-export default AllCampaings;
+export default AllCampaings;  
