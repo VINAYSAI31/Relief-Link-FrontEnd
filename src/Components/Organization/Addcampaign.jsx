@@ -17,20 +17,24 @@ const Addcampaign = () => {
   // Function to handle form submission
   const onSubmit = async (data) => {
     try {
-      // Separate the campaign data from the image file
+      // Prepare the campaign data
       const campaignData = {
         title: data.title,
         description: data.description,
         category: data.category,
-        contributionType: data.contributionType,
+        contributiontype: contributionType === "money" ? " money" : " items", // Set contribution type accordingly
         location: data.location,
-        startDate: data.startDate,
-        endDate: data.endDate,
+        startdate: data.startdate,
+        enddate: data.enddate,
         email: data.email,
         status: data.status, // Include the new status field
+        required: contributionType === "money" ? data.targetAmount : data.goodsType, // Add target amount or goods type for 'required'
       };
 
-      if (contributionType !== "money") {
+      // If contributionType is money, handle targetAmount, otherwise handle goodsType
+      if (contributionType === "money") {
+        campaignData.contributionDetails = data.targetAmount;
+      } else {
         campaignData.contributionDetails = data.goodsType;
       }
 
@@ -133,10 +137,10 @@ const Addcampaign = () => {
                 {errors.category && <p className="error-text">{errors.category.message}</p>}
 
                 {/* Contribution Type */}
-                <label htmlFor="contributionType">Contribution Type</label>
+                <label htmlFor="required">Contribution Type</label>
                 <select
-                  id="contributionType"
-                  {...register("contributionType", { required: "Contribution type is required" })}
+                  id="required"
+                  {...register("required", { required: "Contribution type is required" })}
                   value={contributionType}
                   onChange={(e) => setContributionType(e.target.value)}
                 >
@@ -168,9 +172,9 @@ const Addcampaign = () => {
                 )}
                 {(contributionType === "goods" || contributionType === "items") && (
                   <>
-                    <label htmlFor="goodsType">Specify Goods or Items</label>
+                    <label htmlFor="required">Specify Goods or Items</label>
                     <textarea
-                      id="goodsType"
+                      id="required"
                       placeholder={`Enter the type of ${
                         contributionType === "goods" ? "goods" : "items"
                       } you need`}
@@ -196,7 +200,7 @@ const Addcampaign = () => {
                 <label htmlFor="startdate">Start Date</label>
                 <input
                   type="date"
-                  id="startDate"
+                  id="startdate"
                   {...register("startdate", { required: "Start date is required" })}
                 />
                 {errors.startDate && <p className="error-text">{errors.startDate.message}</p>}
@@ -205,7 +209,7 @@ const Addcampaign = () => {
                 <label htmlFor="enddate">End Date</label>
                 <input
                   type="date"
-                  id="endDate"
+                  id="enddate"
                   {...register("enddate", { required: "End date is required" })}
                 />
                 {errors.endDate && <p className="error-text">{errors.endDate.message}</p>}
@@ -237,13 +241,12 @@ const Addcampaign = () => {
                 <input
                   type="file"
                   id="image"
-                  {...register("image", { required: "Campaign image is required" })}
+                  {...register("image", { required: "Please upload an image" })}
                 />
                 {errors.image && <p className="error-text">{errors.image.message}</p>}
 
-                {/* Submit Button */}
-                <button type="submit" className="submit-campaign-btn">
-                  Add Campaign
+                <button type="submit" className="submit-btn">
+                  Create Campaign
                 </button>
               </form>
             </div>
