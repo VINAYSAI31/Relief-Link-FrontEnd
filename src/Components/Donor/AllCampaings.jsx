@@ -14,12 +14,15 @@ const AllCampaings = () => {
     const fetchCampaigns = async () => {
       try {
         const response = await axios.get('http://localhost:2024/donor/api/getallcamps');
-        const campData = response.data;
+        const allCampaigns = response.data;
 
-        setCampaigns(campData);
+        // Filter only active campaigns
+        const activeCampaigns = allCampaigns.filter((campaign) => campaign.status === 'Active');
 
-        // Fetch images for each campaign
-        const imagePromises = campData.map(async (campaign) => {
+        setCampaigns(activeCampaigns);
+
+        // Fetch images for active campaigns
+        const imagePromises = activeCampaigns.map(async (campaign) => {
           try {
             const imageResponse = await axios.get(
               `http://localhost:2024/donor/api/getimagebyid/${campaign.id}`,
@@ -65,8 +68,7 @@ const AllCampaings = () => {
 
   return (
     <div className="dashboard-container">
-      <Donornavbar/>
-      
+      <Donornavbar />
 
       {/* Main Content */}
       <div className="main-content">
@@ -83,35 +85,34 @@ const AllCampaings = () => {
             </div>
           </div>
 
-            
-      {/* Main Content */}
-      <div >
-        <div className="campaigns-container">
-          {campaigns.length === 0 ? (
-            <p>No campaigns available.</p>
-          ) : (
-            campaigns.map((campaign) => (
-              <div className="campaign-card" key={campaign.id}>
-                <div className="card-image">
-                  <img
-                    src={images[campaign.id] || 'https://via.placeholder.com/150'}
-                    alt={campaign.title}
-                    className="campaign-img"
-                  />
+          {/* Campaigns Section */}
+          <div className="campaigns-container">
+            {campaigns.length === 0 ? (
+              <p>No active campaigns available.</p>
+            ) : (
+              campaigns.map((campaign) => (
+                <div className="campaign-card" key={campaign.id}>
+                  <div className="card-image">
+                    <img
+                      src={images[campaign.id] || 'https://via.placeholder.com/150'}
+                      alt={campaign.title}
+                      className="campaign-img"
+                    />
+                  </div>
+                  <div className="card-content">
+                    <h3 className="campaign-title">{campaign.title}</h3>
+                    <p className="campaign-description">{campaign.description}</p>
+                    <button
+                      className="read-more-button"
+                      onClick={() => fetchCampaignDetails(campaign.id)}
+                    >
+                      Read More
+                    </button>
+                  </div>
                 </div>
-                <div className="card-content">
-                  <h3 className="campaign-title">{campaign.title}</h3>
-                  <p className="campaign-description">{campaign.description}</p>
-                  <button
-                    className="read-more-button"
-                    onClick={() => fetchCampaignDetails(campaign.id)}
-                  >
-                    Read More
-                  </button>
-                </div>
-              </div>
-            ))
-          )}
+              ))
+            )}
+          </div>
         </div>
       </div>
 
@@ -129,19 +130,30 @@ const AllCampaings = () => {
               className="modal-image"
             />
             <p>{selectedCampaign.description}</p>
-            <p><strong>Category:</strong> {selectedCampaign.category}</p>
-            <p><strong>Location:</strong> {selectedCampaign.location}</p>
-            <p><strong>Start Date:</strong> {new Date(selectedCampaign.startdate).toLocaleDateString()}</p>
-            <p><strong>End Date:</strong> {new Date(selectedCampaign.enddate).toLocaleDateString()}</p>
-            <p><strong>Organizer:</strong> {selectedCampaign.organizer}</p>
-            <p><strong>Contact:</strong> {selectedCampaign.contact}</p>
+            <p>
+              <strong>Category:</strong> {selectedCampaign.category}
+            </p>
+            <p>
+              <strong>Location:</strong> {selectedCampaign.location}
+            </p>
+            <p>
+              <strong>Start Date:</strong>{' '}
+              {new Date(selectedCampaign.startdate).toLocaleDateString()}
+            </p>
+            <p>
+              <strong>End Date:</strong>{' '}
+              {new Date(selectedCampaign.enddate).toLocaleDateString()}
+            </p>
+            <p>
+              <strong>Organizer:</strong> {selectedCampaign.organizer}
+            </p>
+            <p>
+              <strong>Contact:</strong> {selectedCampaign.contact}
+            </p>
           </div>
         </div>
       )}
-          </div>
-        </div>
-      </div>
-    
+    </div>
   );
 };
 

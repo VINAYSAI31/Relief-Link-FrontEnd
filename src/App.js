@@ -16,6 +16,7 @@ import Addcampaign from './Components/Organization/Addcampaign.jsx';
 import Mycampaigns from './Components/Organization/Mycampaigns.jsx';
 import AllCampaings from './Components/Donor/AllCampaings.jsx';
 import CampaignDetails from './Components/Donor/CampaignDetails.jsx';
+import Campaings from './Components/Admin/Campaigns.jsx';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/adminhome' element={<Adminhome/>}/>
         <Route path='/admins' element={<Admins />}/>
         <Route path='/donors'element={<Donors/>}/>
+        <Route path='/campaigns' element={<Campaings/>}/>
 
 
 

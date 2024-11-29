@@ -14,7 +14,7 @@ const Mycampaigns = () => {
 
     const fetchCampaigns = async () => {
       try {
-        const response = await axios.get(`https://example.com/api/getcampaigns/${orgId}`);
+        const response = await axios.get(`https://localhost:2024/api/getcampaigns/${orgId}`);
         setCampaigns(response.data);
       } catch (err) {
         setError('Error fetching campaigns');
@@ -68,7 +68,7 @@ const Mycampaigns = () => {
               <p className="campaign-category">Category: {campaign.category}</p>
               <p className="campaign-location">Location: {campaign.location}</p>
               <p className="campaign-dates">
-                {new Date(campaign.startDate).toLocaleDateString()} - {new Date(campaign.endDate).toLocaleDateString()}
+                {new Date(campaign.startDate).toLocaleDateString()} - {new Date(campaign.enddate).toLocaleDateString()}
               </p>
             </div>
           </div>

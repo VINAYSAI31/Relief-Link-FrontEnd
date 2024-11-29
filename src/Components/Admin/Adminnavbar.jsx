@@ -27,7 +27,10 @@ const AdminNavbar = () => {
           <i className="fa-solid fa-building"></i> <span>Organizations</span>
         </a>
         <Link to='/admins'> <i className="fa-solid fa-user-plus"></i> <span>Admins</span></Link>
-        
+        <Link to='/campaigns'>
+  <i className="fa-solid fa-bullhorn"></i> <span>Campaigns</span>
+</Link>
+
        
         <a href="#settings">
           <i className="fa-solid fa-cog"></i> <span>Settings</span>
