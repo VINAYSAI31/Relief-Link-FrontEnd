@@ -1,8 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom';  // For navigation
+import { Link, useNavigate } from 'react-router-dom';  // For navigation
 import '../../Styling/Orgnavbar.css'
+import axios from 'axios';
 
 const Orgnavbar = () => {
+  const navigate=useNavigate();
+  const handleLogout = async () => {
+    try {
+      // Send logout request to backend to invalidate the session
+      const response = await axios.post('http://localhost:2024/org/api/logout', {}, { withCredentials: true });
+  
+      // Check if logout was successful (based on backend response)
+      if (response.status === 200) {
+        alert('Logout successful');
+        // Clear any client-side stored session data (localStorage, sessionStorage, cookies)
+        localStorage.removeItem('token'); // if using localStorage
+        sessionStorage.removeItem('token'); // if using sessionStorage
+        // Optionally clear any auth-related states or context here
+        // redirect to the login page
+        navigate('/orglogin');
+      } else {
+        alert('Logout failed, please try again');
+      }
+    } catch (error) {
+      console.error('Error logging out:', error);
+      alert('An error occurred during logout. Please try again later.');
+    }
+  };
+
   return (
     <div className="orgbar">
       <div className="orgbar-logo">
@@ -33,7 +58,7 @@ const Orgnavbar = () => {
         <Link to="#settings" >
           <i className="fas fa-cog"></i> Settings
         </Link>
-        <Link to="/" >
+        <Link to="/" onClick={handleLogout}>
           <i className="fas fa-sign-out-alt"></i> Logout
         </Link>
       </div>
