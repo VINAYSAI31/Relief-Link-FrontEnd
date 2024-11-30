@@ -116,20 +116,21 @@ const Mycampaigns = () => {
                       )}
                     </div>
                     <h3 className="text-xl font-semibold text-gray-800 mb-2">{campaign.title}</h3>
-                    {/* <p className="text-gray-600">Category: {campaign.category}</p> */}
+                    { <p className="text-gray-600">Category: {campaign.category}</p> }
                     <div className="flex justify-between mt-4">
                       <button
                         onClick={() => deleteCampaign(campaign.id)}
                         className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
                       >
-                        Delete
-                      </button>
-                      <button
+                        Delete</button>
+                        <button
                         onClick={() => handleEdit(campaign)}
                         className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                       >
                         Edit
                       </button>
+                      
+                      
                     </div>
                   </div>
                 ))
