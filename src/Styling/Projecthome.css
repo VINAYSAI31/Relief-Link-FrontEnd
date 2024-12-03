@@ -20,6 +20,7 @@
     min-height: 95vh; /* Full screen height */
     position: relative;
     background: 
+      
       url('../Images/home1.png') no-repeat center center/cover, 
       url('../Images/home2.png') no-repeat center center/cover;
     color: #ffffff;
