@@ -76,7 +76,7 @@ const Donornavbar = () => {
         <Link to="/allcamps">
           <i className="fas fa-donate"></i> {!isCollapsed && "Make a Donation"}
         </Link>
-        <Link to="#history">
+        <Link to="/donationhistory">
           <i className="fas fa-history"></i> {!isCollapsed && "Donation History"}
         </Link>
         <Link to="#settings">

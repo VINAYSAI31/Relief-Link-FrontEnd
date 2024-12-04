@@ -15,9 +15,13 @@ import Orghome from './Components/Organization/Orghome.jsx';
 import Addcampaign from './Components/Organization/Addcampaign.jsx';
 import Mycampaigns from './Components/Organization/Mycampaigns.jsx';
 import AllCampaings from './Components/Donor/AllCampaings.jsx';
-import CampaignDetails from './Components/Donor/CampaignDetails.jsx';
+
 import Campaings from './Components/Admin/Campaigns.jsx';
 import Myprofile from './Components/Donor/Myprofile.jsx';
+import Payment from './Components/Donor/Payment.jsx';
+import PaymentFormWrapper from './Components/Donor/Payment.jsx';
+import DonationHistory from './Components/Donor/DonationHistory.jsx';
+
 
 
 function App() {
@@ -39,8 +43,12 @@ function App() {
         <Route path='donorreg' element={<DonorReg/>}/>
         <Route path='/donorhome' element={<Donorhome/>}/>
         <Route path='/allcamps' element={<AllCampaings/>}/>
-        <Route path='/campaign/:id' element={<CampaignDetails/>}/>
+        {/* <Route path="/payment/:id" element={<Payment />} /> */}
+        <Route path="/payment/:campaignId" element={<PaymentFormWrapper />} />
+        <Route path="/donationhistory" element={<DonationHistory/>}/>
+
         <Route path='/myprofile' element={<Myprofile/>}/>
+        
 
 
 

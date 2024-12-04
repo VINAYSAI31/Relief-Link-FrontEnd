@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Donornavbar from './Donornavbar';
+import { useNavigate } from 'react-router-dom';
 
 const AllCampaings = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -8,6 +9,9 @@ const AllCampaings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [images, setImages] = useState({});
+ 
+
+const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCampaigns = async () => {
@@ -43,27 +47,35 @@ const AllCampaings = () => {
 
   const fetchCampaignDetails = async (id) => {
     try {
+      console.log(`Fetching campaign details for ID: ${id}`);
       const response = await axios.get(`http://localhost:2024/org/api/campaigndetails/${id}`);
+      console.log('Campaign Details Response:', response.data);
+  
       const imageResponse = await axios.get(
         `http://localhost:2024/donor/api/getimagebyid/${id}`,
         { responseType: 'blob' }
       );
       const imageUrl = URL.createObjectURL(imageResponse.data);
+  
+      console.log('Campaign Image URL:', imageUrl);
+  
       setSelectedCampaign({ ...response.data, imageUrl });
-    } catch {
+    } catch (error) {
+      console.error('Error fetching campaign details:', error);
       setError('Error fetching campaign details.');
     }
   };
-  const groupCampaignsByCategory = (campaigns) => {
-    return campaigns.reduce((acc, campaign) => {
-      const category = campaign.category || "Uncategorized";  // Use the category from the campaign object, or "Uncategorized"
-      if (!acc[category]) {
-        acc[category] = [];
-      }
-      acc[category].push(campaign);
-      return acc;
-    }, {});
-  };
+  
+  // const groupCampaignsByCategory = (campaigns) => {
+  //   return campaigns.reduce((acc, campaign) => {
+  //     const category = campaign.category || "Uncategorized";  // Use the category from the campaign object, or "Uncategorized"
+  //     if (!acc[category]) {
+  //       acc[category] = [];
+  //     }
+  //     acc[category].push(campaign);
+  //     return acc;
+  //   }, {});
+  // };
   
   const closeModal = () => setSelectedCampaign(null);
 
@@ -191,13 +203,14 @@ const AllCampaings = () => {
     {selectedCampaign.description}
     {/* Contribution Type and Items integrated into the description */}
     <div className="mt-4">
-      <i className={`fas ${selectedCampaign.contributiontype === 'money' ? 'fa-dollar-sign' : 'fa-cogs'} text-blue-500`}></i>
+      <i className={`fas ${selectedCampaign.contributiontype?.trim().toLowerCase() === 'money' ? 'fa-indian-rupee-sign' : 'fa-cogs'} text-blue-500`}></i>
       <span className="font-semibold ml-2">
-        {selectedCampaign.contributiontype === 'money' ? 'Target Amount:' : 'Items Needed:'}
+        {selectedCampaign.contributiontype?.trim().toLowerCase() === 'money' ? 'Target Amount:' : 'Items Needed:'}
       </span>
       <span className="text-gray-600 ml-2">
-        {selectedCampaign.contributiontype === 'money'
-          ? `$${selectedCampaign.required}`
+        {selectedCampaign.contributiontype?.trim().toLowerCase() === 'money'
+          ?   <span>₹{selectedCampaign.required}</span>
+
           : selectedCampaign.required}
       </span>
     </div>
@@ -234,11 +247,28 @@ const AllCampaings = () => {
 
       {/* Donate Now Button */}
       <div className="p-8 text-center bg-gray-100">
-        <button
-          className="px-10 py-4 bg-green-600 text-white text-xl font-semibold rounded-full hover:bg-green-700 transition duration-200"
-        >
-          Donate Now
-        </button>
+      <button
+  className="px-10 py-4 bg-green-600 text-white text-xl font-semibold rounded-full hover:bg-green-700 transition duration-200"
+  onClick={() => {
+    console.log('Selected Campaign:', selectedCampaign); // Logs the entire selected campaign object
+    const contributionType = selectedCampaign.contributiontype?.trim().toLowerCase();
+    console.log('Contribution Type (Trimmed):', contributionType);
+
+    if (contributionType === 'money') {
+      console.log('Redirecting to Payment Page');
+      navigate(`/payment/${selectedCampaign.id}`);
+    } else {
+      console.log('Redirecting to Logistics Page');
+      navigate(`/logistics/${selectedCampaign.id}`);
+    }
+  }}
+>
+  Donate Now
+</button>
+
+
+
+
       </div>
     </div>
   </div>
