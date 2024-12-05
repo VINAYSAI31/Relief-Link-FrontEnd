@@ -21,6 +21,7 @@ import Myprofile from './Components/Donor/Myprofile.jsx';
 import Payment from './Components/Donor/Payment.jsx';
 import PaymentFormWrapper from './Components/Donor/Payment.jsx';
 import DonationHistory from './Components/Donor/DonationHistory.jsx';
+import MyDashBoard from './Components/Donor/MyDashboard.jsx';
 
 
 
@@ -48,6 +49,7 @@ function App() {
         <Route path="/donationhistory" element={<DonationHistory/>}/>
 
         <Route path='/myprofile' element={<Myprofile/>}/>
+        <Route path='/mydashboard' element={<MyDashBoard/>}/>
         
 
 

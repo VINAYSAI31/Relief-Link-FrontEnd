@@ -9,10 +9,24 @@ const AllCampaings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [images, setImages] = useState({});
+  const [user, setUser] = useState(null);
  
 
 const navigate = useNavigate();
-
+useEffect(() => {
+  // Fetch the logged-in user's details from the backend
+  axios
+    .get("http://localhost:2024/donor/api/getLoggedInDonor", {
+      withCredentials: true, // To send the session cookie along with the request
+    })
+    .then((response) => {
+      console.log(response.data); // Check the response data
+      setUser(response.data); // Save user data in the state
+    })
+    .catch((error) => {
+      console.error("Error fetching user details:", error);
+    });
+}, []);
   useEffect(() => {
     const fetchCampaigns = async () => {
       try {
@@ -92,7 +106,9 @@ const navigate = useNavigate();
       <div className="card-container">
   {/* Top Section */}
   <div className="top-card flex items-center justify-between p-4 bg-blue-600 text-white">
-    <h2>Hello, {sessionStorage.getItem('userName')}</h2>
+  <h2 className="text-xl font-semibold text-gray-800">
+              Welcome, {user ? user.name : 'Loading...'}
+            </h2>
     <div className="flex items-center space-x-4">
       <div className="search-bar relative">
         <input

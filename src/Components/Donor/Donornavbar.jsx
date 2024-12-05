@@ -71,6 +71,9 @@ const Donornavbar = () => {
           <i className="fas fa-user"></i> {!isCollapsed && "My Profile"}
         </Link>
         <Link to="/donorhome">
+          <i className="fas fa-home"></i> {!isCollapsed && "Home"}
+        </Link>
+        <Link to="/mydashboard">
           <i className="fas fa-tachometer-alt"></i> {!isCollapsed && "Dashboard"}
         </Link>
         <Link to="/allcamps">
