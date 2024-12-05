@@ -5,7 +5,7 @@ import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-const stripePromise = loadStripe('pk_test_51O8oHhSAo6Ac8f4rgeTFAqehSKtRRk2HZvPlqmRqGQRR4Nbx9wwnA0nWmDdG85Pagp8vxBIwF6DdqZxFeZ5tD2vd00K39LXQiH');
+const stripePromise = loadStripe('');
 
 const Payment = () => {
     const [amount, setAmount] = useState(0);
