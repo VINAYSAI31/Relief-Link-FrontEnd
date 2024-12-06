@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Donornavbar from './Donornavbar';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { FaHeart, FaUsers, FaArrowUp, FaGift } from 'react-icons/fa'; // Imported icons
 
 const Donorhome = () => {
   const [user, setUser] = useState(null);
@@ -42,29 +43,54 @@ const Donorhome = () => {
           </div>
 
           {/* Main Card */}
-          <div >
-          <div className="main-card p-6 border-t-4 border-blue-500 bg-blue-50 rounded-md shadow-md">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Make a Difference Today!</h3>
-            <p className="text-gray-700 mb-6">
-              Your support means the world to those in need. With each contribution, you bring hope and positive change to countless lives. Every donation counts and takes us closer to making an impact.
-            </p>
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="bg-white p-4 rounded-md shadow-md text-center">
-                <h4 className="font-semibold text-gray-800">Total Donations</h4>
-                <p className="text-blue-600 font-bold text-2xl">$12,345</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Impact Statistics */}
+            <div className="md:col-span-2 bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="bg-blue-600 text-white p-6">
+                <h3 className="text-2xl font-bold mb-2">Your Impact</h3>
+                <p className="text-blue-100">See the difference you're making in the world</p>
               </div>
-              <div className="bg-white p-4 rounded-md shadow-md text-center">
-                <h4 className="font-semibold text-gray-800">Lives Impacted</h4>
-                <p className="text-green-600 font-bold text-2xl">1,234</p>
+              <div className="grid grid-cols-2 gap-4 p-6">
+                <div className="text-center">
+                  <FaHeart className="w-12 h-12 text-red-500 mx-auto mb-2" />
+                  <h4 className="text-xl font-semibold text-gray-700">Total Donations</h4>
+                  <p className="text-3xl font-bold text-blue-600">$12,345</p>
+                </div>
+                <div className="text-center">
+                  <FaUsers className="w-12 h-12 text-green-500 mx-auto mb-2" />
+                  <h4 className="text-xl font-semibold text-gray-700">Lives Impacted</h4>
+                  <p className="text-3xl font-bold text-green-600">1,234</p>
+                </div>
+                <div className="text-center">
+                  <FaArrowUp className="w-12 h-12 text-purple-500 mx-auto mb-2" />
+                  <h4 className="text-xl font-semibold text-gray-700">Donation Growth</h4>
+                  <p className="text-3xl font-bold text-purple-600">+15%</p>
+                </div>
+                <div className="text-center">
+                  <FaGift className="w-12 h-12 text-yellow-500 mx-auto mb-2" />
+                  <h4 className="text-xl font-semibold text-gray-700">Campaigns Supported</h4>
+                  <p className="text-3xl font-bold text-yellow-600">7</p>
+                </div>
               </div>
             </div>
-            <Link to='/allcamps'>
-            <button className="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300">
-              Donate Now
-            </button>
-            </Link>
+
+            {/* Call to Action */}
+            <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-md text-white p-6 flex flex-col justify-between">
+              <div>
+                <h3 className="text-2xl font-bold mb-4">Make a Difference Today!</h3>
+                <p className="mb-6">
+                  Your support brings hope and positive change to countless lives. Every donation takes us closer to making a lasting impact.
+                </p>
+              </div>
+              <Link to='/allcamps' className="w-full">
+                <button className="w-full py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition duration-300 transform hover:scale-105">
+                  Donate Now
+                </button>
+              </Link>
+            </div>
+
+           
           </div>
-        </div>
         </div>
       </div>
     </div>

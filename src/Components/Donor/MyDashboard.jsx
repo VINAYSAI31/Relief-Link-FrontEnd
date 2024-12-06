@@ -25,6 +25,7 @@ const MyDashBoard = () => {
           axios
             .get(`http://localhost:2024/api/donation/donor/${userData.name}`)
             .then((donationResponse) => {
+              console.log(donationResponse);
               const data = donationResponse.data;
               setDonations(data);
 

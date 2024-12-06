@@ -1,68 +1,88 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';  // For navigation
-import '../../Styling/Orgnavbar.css'
-import axios from 'axios';
+import { Menu, Home, Users, PlusCircle, BarChart3, Settings, LogOut, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const NavItem = ({ icon: Icon, label, to, onClick }) => (
+  <Link
+    to={to}
+    onClick={onClick}
+    className="flex items-center gap-3 px-6 py-3.5 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-colors rounded-lg group relative"
+  >
+    <div className="absolute left-0 w-1 h-full bg-primary-500 scale-y-0 group-hover:scale-y-100 transition-transform" />
+    <Icon className="w-5 h-5" />
+    <span className="font-medium">{label}</span>
+  </Link>
+);
 
 const Orgnavbar = () => {
-  const navigate=useNavigate();
   const handleLogout = async () => {
     try {
-      // Send logout request to backend to invalidate the session
-      const response = await axios.post('http://localhost:2024/org/api/logout', {}, { withCredentials: true });
-  
-      // Check if logout was successful (based on backend response)
-      if (response.status === 200) {
-        alert('Logout successful');
-        // Clear any client-side stored session data (localStorage, sessionStorage, cookies)
-        localStorage.removeItem('token'); // if using localStorage
-        sessionStorage.removeItem('token'); // if using sessionStorage
-        // Optionally clear any auth-related states or context here
-        // redirect to the login page
-        navigate('/orglogin');
+      const response = await fetch('http://localhost:2024/org/api/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        // Clear tokens and redirect to login page
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        window.location.href = '/orglogin';
       } else {
-        alert('Logout failed, please try again');
+        console.error('Failed to logout:', response.statusText);
+        alert('Logout failed. Please try again.');
       }
     } catch (error) {
-      console.error('Error logging out:', error);
-      alert('An error occurred during logout. Please try again later.');
+      console.error('Error during logout:', error);
+      alert('An error occurred. Please try again later.');
     }
   };
 
   return (
-    <div className="orgbar">
-      <div className="orgbar-logo">
-        <img src="path/to/logo.png" alt="Organization Logo" />
+    <aside className="w-64 h-screen bg-gray-900 fixed left-0 top-0 border-r border-gray-800 ">
+      <div className="flex flex-col h-full">
+        {/* Header */}
+        <header className="p-6 border-b border-gray-800">
+          <div className="flex items-center gap-3">
+            <Menu className="w-6 h-6 text-primary-500" />
+            <h1 className="text-xl font-bold text-white">Organization</h1>
+          </div>
+        </header>
+
+        {/* User Info */}
+        <div className="p-6 border-b border-gray-800">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
+              <User className="w-5 h-5 text-gray-300" />
+            </div>
+            <div>
+              <h2 className="text-sm font-medium text-white">Welcome back</h2>
+              <p className="text-xs text-gray-400">Organization Admin</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <nav className="flex-1 py-6 space-y-1 px-3">
+          <NavItem icon={Home} label="Dashboard" to="/dashboard" />
+          <NavItem icon={User} label="Organization Profile" to="/orgprofile" />
+          <NavItem icon={PlusCircle} label="Add Campaign" to="/addcampaign" />
+          <NavItem icon={BarChart3} label="My Campaigns" to="/mycampaigns" />
+          <NavItem icon={Users} label="Team Members" to="/orgmembers" />
+          <NavItem icon={Settings} label="Settings" to="/settings" />
+        </nav>
+
+        {/* Footer */}
+        <footer className="p-6 border-t border-gray-800">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 w-full px-4 py-2 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-colors rounded-lg"
+          >
+            <LogOut className="w-5 h-5" />
+            <span className="font-medium">Logout</span>
+          </button>
+        </footer>
       </div>
-      <div className="welcome-text">
-        org {/* Username from backend */}
-      </div>
-      <div className="org-links">
-        <Link to="/orgprofile" >
-          <i className="fas fa-user"></i> ORG Profile
-        </Link>
-        <Link to="#dashboard" >
-          <i className="fas fa-tachometer-alt"></i> Dashboard
-        </Link> 
-        <Link to="/mycampaigns" >
-        <i className="fas fa-hand-holding-heart"></i> My Campaings
-        </Link>
-        <Link to="/addcampaign" className="orgbar-link">
-    <i className="fas fa-hands-helping"></i> Add Campaign
-  </Link>
-        <Link to="#history" >
-        <i className="fas fa-chart-line"></i> Reports
-        </Link>
-        <Link to="/orgmembers">
-          <i className="fas fa-users"></i> Team Members
-        </Link>
-        <Link to="#settings" >
-          <i className="fas fa-cog"></i> Settings
-        </Link>
-        <Link to="/" onClick={handleLogout}>
-          <i className="fas fa-sign-out-alt"></i> Logout
-        </Link>
-      </div>
-    </div>
+    </aside>
   );
 };
 

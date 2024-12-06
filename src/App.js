@@ -22,6 +22,9 @@ import Payment from './Components/Donor/Payment.jsx';
 import PaymentFormWrapper from './Components/Donor/Payment.jsx';
 import DonationHistory from './Components/Donor/DonationHistory.jsx';
 import MyDashBoard from './Components/Donor/MyDashboard.jsx';
+import Logistics from './Components/Donor/Logistics.jsx';
+import LogisticsHome from './Components/Logistics/LogisticsHome.jsx';
+import Login from './Components/Logistics/login.jsx';
 
 
 
@@ -47,6 +50,7 @@ function App() {
         {/* <Route path="/payment/:id" element={<Payment />} /> */}
         <Route path="/payment/:campaignId" element={<PaymentFormWrapper />} />
         <Route path="/donationhistory" element={<DonationHistory/>}/>
+        <Route path="/logistics/:campaignId" element={<Logistics />} />
 
         <Route path='/myprofile' element={<Myprofile/>}/>
         <Route path='/mydashboard' element={<MyDashBoard/>}/>
@@ -62,6 +66,11 @@ function App() {
         <Route path='/orghome' element={<Orghome/>}/>
         <Route path='/addcampaign' element={<Addcampaign/>}/>
         <Route path='/mycampaigns' element={<Mycampaigns/>}/>
+
+
+
+        <Route path='/logisticslogin' element={<Login/>}/>
+        <Route path='/logisticshome' element={<LogisticsHome/>}/>
        
 
         
